@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: SmartLearnAI-LLMOps-AIOps
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: SmartLearnAI-LLMOps-AIOps
+  template:
+    metadata:
+      labels:
+        app: SmartLearnAI-LLMOps-AIOps
+    spec:
+      containers:
+      - name: SmartLearnAI-LLMOps-AIOps
+        image: andrewdoss77/SmartLearnAI:v1
+        ports:
+        - containerPort: 8501
+        env:
+        - name: GROQ_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: groq-api-secret
+              key: GROQ_API_KEY
