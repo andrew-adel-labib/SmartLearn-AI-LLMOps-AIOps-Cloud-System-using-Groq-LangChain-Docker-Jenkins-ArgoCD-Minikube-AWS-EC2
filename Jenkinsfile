@@ -1,10 +1,10 @@
 pipeline {
     agent any
-    // environment {
-    //     DOCKER_HUB_REPO = "andrewdoss77/SmartLearnAI"
-    //     DOCKER_HUB_CREDENTIALS_ID = "dockerhub-token"
-    //     IMAGE_TAG = "v${BUILD_NUMBER}"
-    // }
+    environment {
+        DOCKER_HUB_REPO = "andrewdoss77/smartlearn_ai"
+        DOCKER_HUB_CREDENTIALS_ID = "dockerhub-token"
+        IMAGE_TAG = "v${BUILD_NUMBER}"
+    }
     stages {
         stage('Checkout Github') {
             steps {
@@ -12,24 +12,24 @@ pipeline {
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github-token', url: 'https://github.com/andrew-adel-labib/SmartLearn-AI-LLMOps-AIOps-Cloud-System-using-Groq-LangChain-Docker-Jenkins-ArgoCD-Minikube-AWS-EC2.git']])
             }
         }        
-        // stage('Build Docker Image') {
-        //     steps {
-        //         script {
-        //             echo 'Building Docker image...'
-        //             dockerImage = docker.build("${DOCKER_HUB_REPO}:${IMAGE_TAG}")
-        //         }
-        //     }
-        // }
-        // stage('Push Image to DockerHub') {
-        //     steps {
-        //         script {
-        //             echo 'Pushing Docker image to DockerHub...'
-        //             docker.withRegistry('https://registry.hub.docker.com' , "${DOCKER_HUB_CREDENTIALS_ID}") {
-        //                 dockerImage.push("${IMAGE_TAG}")
-        //             }
-        //         }
-        //     }
-        // }
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    echo 'Building Docker image...'
+                    dockerImage = docker.build("${DOCKER_HUB_REPO}:${IMAGE_TAG}")
+                }
+            }
+        }
+        stage('Push Image to DockerHub') {
+            steps {
+                script {
+                    echo 'Pushing Docker image to DockerHub...'
+                    docker.withRegistry('https://registry.hub.docker.com' , "${DOCKER_HUB_CREDENTIALS_ID}") {
+                        dockerImage.push("${IMAGE_TAG}")
+                    }
+                }
+            }
+        }
         // stage('Update Deployment YAML with New Tag') {
         //     steps {
         //         script {
