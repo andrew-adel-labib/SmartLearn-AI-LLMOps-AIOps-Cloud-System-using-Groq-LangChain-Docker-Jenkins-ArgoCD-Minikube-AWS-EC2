@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: SmartLearn-AI-LLMOps-AIOps-Intelligent-Automation-System
+Version: 0.1
+Author: Andrew-Adel
+Requires-Dist: pandas
+Requires-Dist: nltk
+Requires-Dist: streamlit
+Requires-Dist: python-dotenv
+Requires-Dist: langchain
+Requires-Dist: langchain-core
+Requires-Dist: langchain-groq
+Dynamic: author
+Dynamic: requires-dist
