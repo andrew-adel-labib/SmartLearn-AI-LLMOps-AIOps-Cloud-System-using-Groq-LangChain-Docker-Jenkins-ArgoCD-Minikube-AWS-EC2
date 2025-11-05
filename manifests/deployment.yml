@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: SmartLearnAI-LLMOps-AIOps
+  name: smartlearnai-llmops-aiops
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: SmartLearnAI-LLMOps-AIOps
+      app: smartlearnai-llmops-aiops
   template:
     metadata:
       labels:
-        app: SmartLearnAI-LLMOps-AIOps
+        app: smartlearnai-llmops-aiops
     spec:
       containers:
-      - name: SmartLearnAI-LLMOps-AIOps
+      - name: smartlearnai-llmops-aiops
         image: andrewdoss77/smartlearn_ai:latest
         ports:
         - containerPort: 8501
