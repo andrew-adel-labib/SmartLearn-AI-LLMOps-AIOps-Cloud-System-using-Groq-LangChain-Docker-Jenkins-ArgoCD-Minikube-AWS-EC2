@@ -4,7 +4,7 @@ metadata:
   name: smartlearnai-service
 spec:
   selector:
-    app: SmartLearnAI-LLMOps-AIOps
+    app: smartlearnai-llmops-aiops
   ports:
     - port: 90
       targetPort: 8501  
