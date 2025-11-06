@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: smartlearnai-llmops-aiops
-        image: andrewdoss77/smartlearn_ai:v2
+        image: andrewdoss77/smartlearn_ai:__IMAGE_TAG__
         ports:
         - containerPort: 8501
         env:
