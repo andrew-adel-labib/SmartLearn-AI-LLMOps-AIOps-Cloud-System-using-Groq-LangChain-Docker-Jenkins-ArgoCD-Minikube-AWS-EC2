@@ -1,4 +1,5 @@
 # SmartLearn-AI-LLMOps-AIOps-Cloud-System-using-Groq-LangChain-Docker-Jenkins-ArgoCD-Minikube-AWS-EC2
+
 SmartLearn AI LLMOps and AIOps Intelligent Automation System Using Groq LPU, LangChain, Streamlit, Docker, Jenkins, ArgoCD, GitOps, Kubernetes Minikube and AWS EC2 for Scalable Cloud-Native Deployment
 
 # 🤖 SmartLearn AI LLMOps System
@@ -142,6 +143,46 @@ pipeline {
 
 ---
 
+## 🔗 GitHub Webhook Integration with Jenkins
+
+### 1. Purpose
+
+The GitHub Webhook allows **automated Jenkins builds** whenever code is pushed to your repository — removing the need to manually trigger jobs after every change.
+
+### 2. Configuration Steps
+
+1. Go to your **GitHub repository → Settings → Webhooks → Add Webhook**.
+2. Set the **Payload URL** to your Jenkins endpoint:
+
+   ```
+   http://<EC2-Public-IP>:8080/github-webhook/
+   ```
+3. Choose **Content type:**
+
+   ```
+   application/json
+   ```
+4. Select:
+
+   ```
+   Just the push event
+   ```
+5. Click **Add Webhook**.
+
+### 3. Jenkins Setup
+
+* In Jenkins, ensure the **“GitHub Integration”** and **“GitHub API”** plugins are installed.
+* Inside your Jenkins pipeline job, go to:
+  **Configure → Build Triggers → Check “GitHub hook trigger for GITScm polling”**.
+
+Now every push to your GitHub repo will **automatically start a Jenkins pipeline build**.
+
+### 4. Verification
+
+You can test the webhook connection by committing any small change (like editing the README) — Jenkins should automatically start a new build.
+
+---
+
 ## 🎯 ArgoCD Deployment (CD)
 
 ### Deploy ArgoCD on Kubernetes
@@ -262,4 +303,3 @@ SmartLearn-AI-LLMOps-System/
 ---
 
 This `README.md` provides a complete end-to-end overview of how to build, integrate, and deploy the **SmartLearn AI LLMOps System** on AWS EC2 using Jenkins, Docker Hub, ArgoCD, and Kubernetes with NodePort exposure.
-
