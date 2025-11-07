@@ -119,18 +119,23 @@ sudo docker run -d \
   -v /home/ubuntu/jenkins_home:/var/jenkins_home \
   jenkins/jenkins:lts
 ```
+
 ✅ Access Jenkins at:  
 👉 `http://<EC2-Public-IP>:9595`
-💡 Make sure port 9595 is allowed in your AWS Security Group (Inbound rule → TCP 9595 → 0.0.0.0/0).
+💡 Make sure port `9595` is allowed in your AWS Security Group `Inbound rule → TCP 9595 → 0.0.0.0/0`
 
 Create a **Pipeline Job** and connect it to your GitHub repository.
+
 ---
 
 ### 🔑 Get Admin Password
+
 ```bash
 sudo docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 ```
+
 👉 Copy this and paste it in the Jenkins setup screen.
+
 ---
 
 ### 🔗 GitHub Webhook Integration
