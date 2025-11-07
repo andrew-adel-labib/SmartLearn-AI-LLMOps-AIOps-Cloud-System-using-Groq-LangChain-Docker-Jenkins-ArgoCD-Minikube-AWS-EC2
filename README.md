@@ -1,92 +1,127 @@
-# 🤖 SmartLearn AI LLMOps System
+<h1 align="left">🤖 SmartLearn AI LLMOps System</h1>
 
-## 🧠 Overview
+<h2 style="color:#007BFF;">🧠 Overview</h2>
 
-SmartLearn AI LLMOps System is a **fully automated CI/CD and MLOps pipeline** integrating modern DevOps and AI engineering tools — **GitHub, Jenkins, Docker Hub, ArgoCD, Groq AI, LangChain, and Kubernetes** — deployed on **AWS EC2** using **NodePort services**.
+SmartLearn AI LLMOps System is a fully automated CI/CD and MLOps pipeline designed to streamline the deployment of AI-driven learning and quiz-generation applications.  
+It integrates **GitHub**, **Jenkins**, **Docker Hub**, **ArgoCD**, **Groq AI**, **LangChain**, and **Kubernetes**, deployed on **AWS EC2 instances** using **NodePort** services.
 
-This project demonstrates a complete AI application lifecycle from **code commit → build → containerization → deployment → inference acceleration** through a robust, intelligent automation system.
-
----
-
-## 🧩 Features
-
-- 🚀 **End-to-end CI/CD** automation with Jenkins, ArgoCD, and Webhooks  
-- 🧠 **AI-driven inference** with **Groq AI LPUs** for high-speed performance  
-- 🧩 **LangChain-powered orchestration** for LLM logic and automation  
-- ☸️ **Kubernetes** for scalable container management  
-- ☁️ **AWS EC2** cluster hosting Jenkins, ArgoCD, and K8s  
-- 🐳 **Dockerized architecture** for consistent builds  
-- 🔗 **GitHub Webhook** integration for automated triggers  
-- 🌐 **NodePort** service exposing the app publicly  
+This project demonstrates a complete AI/ML lifecycle — from **code commit → build → containerization → deployment → production inference** — powered by **Groq AI acceleration** and **LangChain orchestration**.
 
 ---
 
-## 🧱 Tech Stack
+<h2 style="color:#28a745;">🧩 Features</h2>
 
-| 🛠️ Tool / Service | 💡 Purpose | 🔍 Detailed Description |
-|--------------------|-------------|--------------------------|
-| 🧠 **LangChain** | LLM Orchestration Framework | Manages and chains together language model operations, memory, and tools to handle SmartLearn AI logic flow. |
-| ⚡ **Groq AI** | AI Inference Accelerator | Provides lightning-fast, low-latency inference for deployed AI models using Groq LPUs (Language Processing Units). |
-| 🐙 **GitHub** | Source Control | Hosts project code and manages versioning; acts as the CI trigger source through webhooks. |
-| 🔗 **GitHub Webhook** | CI Automation | Notifies Jenkins automatically when commits are pushed, triggering build and deployment pipelines. |
-| ⚙️ **Jenkins** | Continuous Integration | Pulls code, builds Docker images, and pushes to Docker Hub through pipeline automation. |
-| 🐳 **Docker** | Containerization Platform | Packages application into portable images for seamless deployment across environments. |
-| 📦 **Docker Hub** | Image Registry | Stores versioned Docker images created by Jenkins for deployment in Kubernetes. |
-| 🚀 **ArgoCD** | Continuous Deployment (GitOps) | Continuously synchronizes GitHub manifests with Kubernetes deployments, ensuring real-time updates. |
-| ☸️ **Kubernetes (Minikube)** | Container Orchestration | Manages containers, pods, and services; supports scaling and fault tolerance. |
-| ☁️ **AWS EC2** | Cloud Infrastructure | Hosts the Jenkins server, ArgoCD controller, and Kubernetes cluster on cloud infrastructure. |
-| 🌐 **NodePort Service** | Network Exposure | Makes Kubernetes services accessible from the internet using static NodePort mapping. |
-| 🔧 **Kubectl** | Kubernetes CLI Tool | Used for applying, managing, and monitoring Kubernetes resources. |
-| 📄 **YAML Manifests** | Configuration Management | Define Kubernetes deployments and services for automated rollout. |
+- 🚀 End-to-end CI/CD automation using Jenkins, ArgoCD & Webhooks  
+- 🧠 AI-powered quiz generator based on user-provided topics  
+- ⚙️ LangChain for orchestrating LLM logic and structured question generation  
+- ⚡ Groq AI LPUs for lightning-fast AI inference  
+- ☸️ Kubernetes orchestration on AWS EC2 (NodePort)  
+- 🐳 Dockerized architecture for portability  
+- 🔗 GitHub Webhook integration for instant Jenkins triggers  
+- ☁️ ArgoCD GitOps synchronization for automated deployments  
+- 📊 Real-time evaluation and results generation inside the app  
 
 ---
 
-## ⚙️ Setup & Usage
+<h2 style="color:#e67e22;">🧠 Project Idea: SmartLearn AI Quiz Generator</h2>
 
-### 1. Clone Repository
+The core idea of SmartLearn AI is to provide an **interactive AI-powered quiz generator**.  
+Users input a topic, question type, difficulty level, and number of questions, and the app automatically generates a custom quiz using **LLMs through LangChain**.
+
+### 🧩 Supported Question Types
+- Multiple Choice  
+- True/False  
+- Fill in the Blank  
+- Short Answer  
+- Descriptive  
+- Ordering  
+- Multi-Select  
+- Numerical  
+
+After generating the quiz:
+- Users can answer interactively.  
+- The system evaluates responses and shows the score and feedback.  
+- Results can be saved and downloaded as CSV.  
+
+This AI quiz app is served via **Streamlit**, deployed through an automated CI/CD pipeline built with **Jenkins**, **Docker**, **ArgoCD**, and **Kubernetes**.
+
+---
+
+<h2 style="color:#17a2b8;">🚀 System Workflow</h2>
+
+1. **Code Push to GitHub** → triggers **Webhook** → notifies **Jenkins**  
+2. **Jenkins Pipeline** → pulls code, builds Docker image, pushes to Docker Hub  
+3. **Docker Hub** → stores versioned images  
+4. **ArgoCD** → monitors GitHub manifests and deploys to Kubernetes  
+5. **Kubernetes Cluster (AWS EC2)** → runs the app using NodePort for public access  
+
+---
+
+<h2 style="color:#9b59b6;">⚙️ Setup & Installation</h2>
+
+### 1️⃣ Clone Repository
 ```bash
 git clone https://github.com/<your-username>/SmartLearn-AI-LLMOps-System.git
 cd SmartLearn-AI-LLMOps-System
 ```
 
-### 2. Launch EC2 Instance
-- Choose Ubuntu 22.04 (t2.medium or higher)
-- Configure **Security Group Ports:**
-  - 22 (SSH)
-  - 8080 (Jenkins)
-  - 30000–32767 (NodePort Range)
+### 2️⃣ Launch AWS EC2 Instance
 
-### 3. Install Dependencies
+Use Ubuntu 22.04 (t2.medium or higher)
+
+Open ports:
+
+22 (SSH)
+
+8080 (Jenkins)
+
+30000–32767 (NodePort range)
+
+### 3️⃣ Install Dependencies
 ```bash
-sudo apt update && sudo apt install -y docker.io kubectl minikube
-sudo systemctl enable docker && sudo systemctl start docker
+sudo apt update && sudo apt install -y docker.io docker-compose kubectl minikube
+sudo systemctl start docker
+sudo systemctl enable docker
 minikube start --driver=docker
 ```
+<h2 style="color:#f39c12;">🐳 Docker Build & Push Commands</h2>
+Action	Command	Description
+Build Image	docker build -t <dockerhub-user>/smartlearn-ai:latest .	Builds image using project Dockerfile
+Login	docker login	Authenticate with Docker Hub
+Push Image	docker push <dockerhub-user>/smartlearn-ai:latest	Upload image to Docker Hub
+Run Locally	docker run -d -p 8080:8080 <dockerhub-user>/smartlearn-ai:latest	Run the image locally for testing
+<h2 style="color:#2ecc71;">⚙️ Jenkins Integration (CI)</h2>
+🧩 Install Jenkins
+```bash
+sudo apt install openjdk-11-jre -y
+wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+sudo apt update && sudo apt install jenkins -y
+```
 
----
+Access Jenkins at:
+👉 http://<EC2-Public-IP>:8080
 
-## 🧰 Docker Commands
+Create a Pipeline Job and connect it to your GitHub repository.
 
-| Action | Command | Description |
-|--------|----------|-------------|
-| Build Image | `docker build -t <user>/smartlearn-ai:latest .` | Build the project Docker image. |
-| Run Container | `docker run -d -p 8080:8080 <user>/smartlearn-ai:latest` | Run image locally for testing. |
-| Login | `docker login` | Authenticate with Docker Hub. |
-| Push Image | `docker push <user>/smartlearn-ai:latest` | Upload image to Docker Hub. |
+<h2 style="color:#c0392b;">🔗 GitHub Webhook Integration</h2>
 
----
+Go to GitHub → Settings → Webhooks → Add Webhook
 
-## ⚙️ Jenkins Pipeline (CI)
+Set:
 
-1. Create a Jenkins Pipeline Job.  
-2. Add your repository URL and credentials.  
-3. Configure Webhook from GitHub:  
-   - Payload URL: `http://<EC2-IP>:8080/github-webhook/`  
-   - Content type: `application/json`  
-   - Trigger: *Just the push event*  
+Payload URL: http://<EC2-IP>:8080/github-webhook/
 
-**Sample Jenkinsfile**
-```groovy
+Content type: application/json
+
+Trigger: “Just the push event”
+
+In Jenkins → Configure job → Check “GitHub hook trigger for GITScm polling.”
+
+Push a commit to GitHub — Jenkins should automatically start a new build.
+
+<h2 style="color:#16a085;">🧱 Jenkinsfile Example</h2>
+```bash
 pipeline {
     agent any
     stages {
@@ -100,9 +135,9 @@ pipeline {
                 sh 'docker build -t <dockerhub-user>/smartlearn-ai:latest .'
             }
         }
-        stage('Push Image') {
+        stage('Push to Docker Hub') {
             steps {
-                withCredentials([string(credentialsId: 'dockerhub-token', variable: 'DOCKER_PASS')]) {
+                withCredentials([string(credentialsId: 'dockerhub-pass', variable: 'DOCKER_PASS')]) {
                     sh 'echo $DOCKER_PASS | docker login -u <dockerhub-user> --password-stdin'
                     sh 'docker push <dockerhub-user>/smartlearn-ai:latest'
                 }
@@ -111,56 +146,74 @@ pipeline {
     }
 }
 ```
-
----
-
-## 🚀 ArgoCD Deployment (CD)
-
-### Deploy ArgoCD
+<h2 style="color:#d35400;">🚀 ArgoCD Deployment (CD)</h2>
+### 1️⃣ Deploy ArgoCD
 ```bash
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 ```
-
-### Access ArgoCD
+### 2️⃣ Access ArgoCD Dashboard
 ```bash
 kubectl port-forward svc/argocd-server -n argocd 8081:443
 ```
-Then open in browser: `https://localhost:8081`
 
-### Deploy App
+Then open:
+👉 https://localhost:8081
+
+### 3️⃣ Connect Repository
+
+Add GitHub repo inside ArgoCD UI
+
+Set Sync Policy → Automatic
+
+### 4️⃣ Apply Kubernetes Manifests
 ```bash
 kubectl apply -f manifest/deployment.yml
 kubectl apply -f manifest/service.yml
 ```
 
-**Access App:**  
-```
-http://<EC2-Public-IP>:<NodePort>
-```
+Access your app at:
+👉 http://<EC2-Public-IP>:<NodePort>
 
----
-
-## 🧱 Project Structure
-```
-SmartLearn-AI-LLMOps-System/
-│
-├── manifest/
-│   ├── deployment.yml
-│   └── service.yml
-├── Jenkinsfile
-├── Dockerfile
-├── src/
-│   ├── generator/
-│   └── utils/
-└── README.md
+<h2 style="color:#2980b9;">☸️ Kubernetes NodePort Access</h2>
+```bash
+kubectl get svc
 ```
 
----
+Access:
+👉 http://<EC2-Public-IP>:<NodePort>
 
-## 👤 Author
+Example:
+👉 http://13.58.24.122:30007
 
-**Andrew Adel Labib**  
-🧠 NLP Engineer | GenAI Engineer  
-📧 [andrewadellabib7blackbuzzard@gmail.com](mailto:andrewadellabib7blackbuzzard@gmail.com)  
-🔗 [LinkedIn](https://www.linkedin.com/in/andrew-adel-b865b1244)
+<h2 style="color:#8e44ad;">💻 Commands Summary</h2>
+Action	Command	Description
+Build Docker Image	docker build -t <user>/smartlearn-ai:latest .	Build Docker image
+Push to Docker Hub	docker push <user>/smartlearn-ai:latest	Push image
+Start Minikube	minikube start --driver=docker	Start local Kubernetes cluster
+Apply Deployment	kubectl apply -f manifest/deployment.yml	Deploy pods
+Apply Service	kubectl apply -f manifest/service.yml	Expose via NodePort
+Check Pods	kubectl get pods	Verify running pods
+Get NodePort	kubectl get svc	Retrieve exposed port
+<h2 style="color:#e74c3c;">🧱 Tech Stack</h2>
+🛠️ Tool / Service	💡 Purpose	🔍 Detailed Description
+🧠 LangChain	LLM Orchestration Framework	Connects large language models to backend logic, handling prompt chaining, question generation, and reasoning.
+⚡ Groq AI	AI Inference Accelerator	Ultra-fast, low-latency inference for LLM models using LPUs.
+🐙 GitHub	Source Control	Hosts code, manages versioning, and triggers Jenkins builds via Webhooks.
+🔗 GitHub Webhook	CI Automation	Automatically triggers Jenkins pipelines on code push.
+⚙️ Jenkins	Continuous Integration	Automates build, testing, and Docker image creation.
+🐳 Docker	Containerization	Packages the app and dependencies into a portable image.
+📦 Docker Hub	Image Registry	Stores versioned Docker images for Kubernetes pulls.
+🚀 ArgoCD	Continuous Deployment (GitOps)	Syncs manifests automatically to Kubernetes for live deployment.
+☸️ Kubernetes (Minikube)	Orchestration	Deploys, manages, and scales containerized workloads.
+☁️ AWS EC2	Cloud Infrastructure	Hosts Jenkins, ArgoCD, and Kubernetes cluster.
+🌐 NodePort Service	Networking	Exposes services externally from EC2.
+🔧 Kubectl	CLI Management	Manages and monitors Kubernetes deployments.
+📄 YAML Manifests	Configuration	Defines deployments, replicas, and services.
+
+<h2 style="color:#34495e;">👤 Author</h2>
+
+Andrew Adel Labib
+🧠 NLP Engineer | GenAI Engineer
+📧 andrewadellabib7blackbuzzard@gmail.com
+🔗 LinkedIn
