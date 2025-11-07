@@ -66,8 +66,8 @@ Use **Ubuntu 22.04 (t2.medium or higher)**
 
 - When creating the EC2 instance, open ports:
 
-| **Port**      | **Purpose**                  |
-|---------------|------------------------------|
+| **Port**     | **Purpose**                  |
+|:-------------:|:----------------------------:|
 | 22            | SSH                          |
 | 9595          | Jenkins                      |
 | 31704         | ArgoCD                       |
