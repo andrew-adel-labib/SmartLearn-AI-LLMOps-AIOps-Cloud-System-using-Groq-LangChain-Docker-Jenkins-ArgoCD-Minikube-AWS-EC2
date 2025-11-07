@@ -73,7 +73,7 @@ Open ports:
 
 ### 3️⃣ Install Dependencies
 ```bash
-sudo apt update && sudo apt install -y docker.io docker-compose kubectl minikube
+sudo apt update && sudo apt install -y docker.io kubectl minikube
 sudo systemctl start docker
 sudo systemctl enable docker
 minikube start --driver=docker
