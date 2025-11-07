@@ -202,8 +202,8 @@ kubectl get secret -n argocd argocd-initial-admin-secret \
 ---
 
 ### 3️⃣ Connect Repository
-In ArgoCD UI → Settings → Repositories → Connect Repo 
-Set **Sync Policy → Automatic**
+In ArgoCD UI → Settings → Repositories → Connect Repo :
+- Set **Sync Policy → Automatic**
 
 ### 4️⃣ Apply SmartLearn App Kubernetes Manifests
 ```bash
