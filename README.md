@@ -1,6 +1,6 @@
 # 🤖 SmartLearn AI LLMOps System
 
-## 🧠 Overview
+## 💡 Overview
 SmartLearn AI LLMOps System is a fully automated CI/CD and MLOps pipeline designed to streamline the deployment of AI-driven learning and quiz-generation applications.  
 It integrates **GitHub**, **Jenkins**, **Docker Hub**, **ArgoCD**, **Groq AI**, **LangChain**, and **Kubernetes**, deployed on **AWS EC2 instances** using **NodePort** services.
 
