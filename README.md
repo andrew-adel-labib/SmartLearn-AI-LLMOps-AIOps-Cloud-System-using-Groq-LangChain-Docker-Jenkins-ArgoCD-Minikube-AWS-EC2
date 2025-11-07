@@ -231,5 +231,5 @@ Example:
 ## 👤 Author
 **Andrew Adel Labib**  
 🧠 *NLP Engineer | GenAI Engineer*  
-📧 **andrewadellabib7blackbuzzard@gmail.com**  
+📧 **andrewadellabib77@gmail.com**  
 🔗 [LinkedIn](https://www.linkedin.com/in/andrew-adel-b865b1244)
