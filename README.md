@@ -9,7 +9,7 @@ This project demonstrates a complete AI/ML lifecycle — from **code commit → 
 ---
 
 ## 🧩 Features
-- 🚀 End-to-end CI/CD automation using Jenkins, ArgoCD & Webhooks  
+- 🚀 End-to-end CI/CD automation using Jenkins, ArgoCD and Webhooks  
 - 🧠 AI-powered quiz generator based on user-provided topics  
 - ⚙️ LangChain for orchestrating LLM logic and structured question generation  
 - ⚡ Groq AI LPUs for lightning-fast AI inference  
