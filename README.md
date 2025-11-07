@@ -66,13 +66,13 @@ Use **Ubuntu 22.04 (t2.medium or higher)**
 
 - When creating the EC2 instance, open ports:
 
-| Port        | Purpose                   |
-| ----------- | ------------------------- |
-| 22          | SSH                       |
-| 9595        | Jenkins                   |
-| 31704       | ArgoCD                    |
-| 9090        | SmartLearn App            |
-| 30000–32767 | Kubernetes NodePort range |
+| **Port**      | **Purpose**                  |
+|---------------|------------------------------|
+| 22            | SSH                          |
+| 9595          | Jenkins                      |
+| 31704         | ArgoCD                       |
+| 9090          | SmartLearn App               |
+| 30000–32767   | Kubernetes NodePort range    |
 
 ---
 
