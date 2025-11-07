@@ -55,6 +55,7 @@ This AI quiz app is served via **Streamlit**, deployed through an automated CI/C
 
 ## 🏗️ System Architecture
 ![System Architecture](System%20Architecture/SmartLearn%20AI%20System%20Architecture.jpg)
+
 ---
 
 ## ⚙️ Setup & Installation
