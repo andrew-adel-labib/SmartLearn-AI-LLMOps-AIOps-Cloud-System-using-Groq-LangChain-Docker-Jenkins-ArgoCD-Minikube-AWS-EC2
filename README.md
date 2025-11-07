@@ -64,10 +64,15 @@ cd SmartLearn-AI-LLMOps-AIOps-Cloud-System-using-Groq-LangChain-Docker-Jenkins-A
 ### 2️⃣ Launch AWS EC2 Instance
 Use **Ubuntu 22.04 (t2.medium or higher)**
 
-Open ports:
-- 22 (SSH)
-- 8080 (Jenkins)
-- 30000–32767 (NodePort range)
+- When creating the EC2 instance, open ports:
+
+| Port        | Purpose                   |
+| ----------- | ------------------------- |
+| 22          | SSH                       |
+| 9595        | Jenkins                   |
+| 31704       | ArgoCD                    |
+| 9090        | SmartLearn App            |
+| 30000–32767 | Kubernetes NodePort range |
 
 ---
 
@@ -94,24 +99,44 @@ minikube start --driver=docker
 
 ## ⚙️ Jenkins Integration (CI)
 
-### 🧩 Install Jenkins
+### 🧩 Run Jenkins as Docker Container on EC2
+
+### 1️⃣ Pull Jenkins image 
 ```bash
-sudo apt install openjdk-11-jre -y
-wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
-sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
-sudo apt update && sudo apt install jenkins -y
+sudo docker pull jenkins/jenkins:lts
 ```
-Access Jenkins at:  
-👉 `http://<EC2-Public-IP>:8080`
+### 2️⃣ Create persistent volume
+```bash
+sudo mkdir -p /home/ubuntu/jenkins_home
+sudo chown 1000:1000 /home/ubuntu/jenkins_home
+```
+### 3️⃣ Run Jenkins container named "jenkins"
+```bash
+sudo docker run -d \
+  --name jenkins \
+  -p 9595:8080 \
+  -p 50000:50000 \
+  -v /home/ubuntu/jenkins_home:/var/jenkins_home \
+  jenkins/jenkins:lts
+```
+✅ Access Jenkins at:  
+👉 `http://<EC2-Public-IP>:9595`
+💡 Make sure port 9595 is allowed in your AWS Security Group (Inbound rule → TCP 9595 → 0.0.0.0/0).
 
 Create a **Pipeline Job** and connect it to your GitHub repository.
+---
 
+### 🔑 Get Admin Password
+```bash
+sudo docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+```
+👉 Copy this and paste it in the Jenkins setup screen.
 ---
 
 ### 🔗 GitHub Webhook Integration
 1. Go to **GitHub → Settings → Webhooks → Add Webhook**
 2. Set:
-   - Payload URL: `http://<EC2-IP>:8080/github-webhook/`
+   - Payload URL: `http://<EC2-IP>:9595/github-webhook/`
    - Content type: `application/json`
    - Trigger: “Just the push event”
 3. In Jenkins → Configure job → check **“GitHub hook trigger for GITScm polling.”**
@@ -156,37 +181,57 @@ kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 ```
 
-### 2️⃣ Access ArgoCD Dashboard
+### 2️⃣ Expose ArgoCD Dashboard via NodePort (Accessible via EC2 Public IP)
 ```bash
-kubectl port-forward svc/argocd-server -n argocd 8081:443
+kubectl patch svc argocd-server -n argocd \
+  -p '{"spec": {"type": "NodePort", "ports": [{"port": 80, "targetPort": 8080, "nodePort": 31704}]}}'
 ```
 Then open:  
-👉 `https://localhost:8081`
+👉 `https://<EC2-Public-IP>t:31704`
+
+- Retrieve admin password:
+```bash
+kubectl get secret -n argocd argocd-initial-admin-secret \
+  -o jsonpath="{.data.password}" | base64 -d
+```
 
 ---
 
 ### 3️⃣ Connect Repository
-Add GitHub repo inside ArgoCD UI  
+In ArgoCD UI → Settings → Repositories → Connect Repo 
 Set **Sync Policy → Automatic**
 
-### 4️⃣ Apply Kubernetes Manifests
+### 4️⃣ Apply SmartLearn App Kubernetes Manifests
 ```bash
 kubectl apply -f manifest/deployment.yml
 kubectl apply -f manifest/service.yml
 ```
-Access your app at:  
-👉 `http://<EC2-Public-IP>:<NodePort>`
+
+- Expose the app service publicly:
+```bash
+kubectl patch svc smartlearnai-service -n argocd \
+  -p '{"spec": {"type": "NodePort", "ports": [{"port": 90, "targetPort": 90, "nodePort": 9090}]}}'
+```
+
+- Access your app at:  
+👉 `http://<EC2-Public-IP>:9090`
 
 ---
 
 ## ☸️ Kubernetes NodePort Access
 ```bash
-kubectl get svc
+kubectl get svc -n argocd
+```
+- Example output
+```pgsql
+NAME                   TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
+argocd-server          NodePort    10.97.0.1      <none>        80:31704/TCP   10m
+smartlearnai-service   NodePort    10.97.0.2      <none>        90:9090/TCP    5m
 ```
 Access:  
-👉 `http://<EC2-Public-IP>:<NodePort>`  
-Example:  
-👉 `http://13.58.24.122:30007`
+👉 ArgoCD → `http://<EC2-IP>:31704`
+
+👉 SmartLearn App → `http://<EC2-IP>:9090`
 
 ---
 
