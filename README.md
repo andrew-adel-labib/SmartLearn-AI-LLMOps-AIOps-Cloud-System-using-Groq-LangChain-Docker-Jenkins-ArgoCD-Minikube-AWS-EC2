@@ -225,8 +225,7 @@ Example:
 ---
 
 ## 🏗️ Project Structure
-
-
+![System Architecture](System%20Architecture/SmartLearn%20AI%20System%20Architecture.JPG)
 ---
 
 ## 👤 Author
