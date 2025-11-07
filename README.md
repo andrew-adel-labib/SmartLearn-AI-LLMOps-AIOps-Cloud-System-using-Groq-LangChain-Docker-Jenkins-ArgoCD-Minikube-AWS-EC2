@@ -49,11 +49,11 @@ This AI quiz app is served via **Streamlit**, deployed through an automated CI/C
 
 <h2 style="color:#17a2b8;">🚀 System Workflow</h2>
 
-1. **Code Push to GitHub** → triggers **Webhook** → notifies **Jenkins**  
-2. **Jenkins Pipeline** → pulls code, builds Docker image, pushes to Docker Hub  
-3. **Docker Hub** → stores versioned images  
-4. **ArgoCD** → monitors GitHub manifests and deploys to Kubernetes  
-5. **Kubernetes Cluster (AWS EC2)** → runs the app using NodePort for public access  
+- **Code Push to GitHub** → triggers **Webhook** → notifies **Jenkins**  
+- **Jenkins Pipeline** → pulls code, builds Docker image, pushes to Docker Hub  
+- **Docker Hub** → stores versioned images  
+- **ArgoCD** → monitors GitHub manifests and deploys to Kubernetes  
+- **Kubernetes Cluster (AWS EC2)** → runs the app using NodePort for public access  
 
 ---
 
@@ -71,11 +71,11 @@ Use Ubuntu 22.04 (t2.medium or higher)
 
 Open ports:
 
-22 (SSH)
+- 22 (SSH)
 
-8080 (Jenkins)
+- 8080 (Jenkins)
 
-30000–32767 (NodePort range)
+- 30000–32767 (NodePort range)
 
 ### 3️⃣ Install Dependencies
 ```bash
@@ -85,11 +85,13 @@ sudo systemctl enable docker
 minikube start --driver=docker
 ```
 <h2 style="color:#f39c12;">🐳 Docker Build & Push Commands</h2>
-Action	Command	Description
-Build Image	docker build -t <dockerhub-user>/smartlearn-ai:latest .	Builds image using project Dockerfile
-Login	docker login	Authenticate with Docker Hub
-Push Image	docker push <dockerhub-user>/smartlearn-ai:latest	Upload image to Docker Hub
-Run Locally	docker run -d -p 8080:8080 <dockerhub-user>/smartlearn-ai:latest	Run the image locally for testing
+| Action      | Command                                                            | Description                           |
+| ----------- | ------------------------------------------------------------------ | ------------------------------------- |
+| Build Image | `docker build -t <dockerhub-user>/smartlearn-ai:latest .`          | Builds image using project Dockerfile |
+| Login       | `docker login`                                                     | Authenticate with Docker Hub          |
+| Push Image  | `docker push <dockerhub-user>/smartlearn-ai:latest`                | Upload image to Docker Hub            |
+| Run Locally | `docker run -d -p 8080:8080 <dockerhub-user>/smartlearn-ai:latest` | Run the image locally for testing     |
+
 <h2 style="color:#2ecc71;">⚙️ Jenkins Integration (CI)</h2>
 🧩 Install Jenkins
 ```bash
