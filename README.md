@@ -58,7 +58,7 @@ This AI quiz app is served via **Streamlit**, deployed through an automated CI/C
 ### 1️⃣ Clone Repository
 ```bash
 git clone https://github.com/andrew-adel-labib/SmartLearn-AI-LLMOps-AIOps-Cloud-System-using-Groq-LangChain-Docker-Jenkins-ArgoCD-Minikube-AWS-EC2.git
-cd SmartLearn-AI-LLMOps-System
+cd SmartLearn-AI-LLMOps-AIOps-Cloud-System-using-Groq-LangChain-Docker-Jenkins-ArgoCD-Minikube-AWS-EC2
 ```
 
 ### 2️⃣ Launch AWS EC2 Instance
