@@ -58,7 +58,7 @@ This AI quiz app is served via **Streamlit**, deployed through an automated CI/C
 
 ---
 
-## ⚙️ Setup & Installation
+## ⚙️ Setup and Installation
 
 ### 1️⃣ Clone Repository
 ```bash
