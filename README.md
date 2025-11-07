@@ -53,6 +53,10 @@ This AI quiz app is served via **Streamlit**, deployed through an automated CI/C
 
 ---
 
+## 🏗️ System Architecture
+![System Architecture](System%20Architecture/SmartLearn%20AI%20System%20Architecture.jpg)
+---
+
 ## ⚙️ Setup & Installation
 
 ### 1️⃣ Clone Repository
@@ -271,10 +275,6 @@ Access:
 | 🔧 **Kubectl** | CLI Management | Controls, manages, and monitors Kubernetes deployments. |
 | 📄 **YAML Manifests** | Configuration | Defines deployments, services, replicas, and container specs. |
 
----
-
-## 🏗️ System Architecture
-![System Architecture](System%20Architecture/SmartLearn%20AI%20System%20Architecture.jpg)
 ---
 
 ## 👤 Author
